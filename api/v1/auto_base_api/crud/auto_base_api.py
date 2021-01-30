@@ -40,4 +40,8 @@ class CRUDAutoBaseApi(CRUDBase[AutoBaseApi , auto_base_api_schemas.BaseApiCreate
         obj = db.query(self.model).filter(self.model.id == id).update({self.model.is_enable : is_enable})
         db.commit()
         return obj
+    def getInfoById(self, * , db : Session , id : int) -> AutoBaseApi:
+        db = db
+        obj = db.query(self.model).filter(self.model.id == id).first()
+        return obj
 curd_base_api = CRUDAutoBaseApi(AutoBaseApi)

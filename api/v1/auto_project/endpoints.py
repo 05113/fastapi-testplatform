@@ -11,6 +11,8 @@ from utils.tools_func import serialize_sqlalchemy_obj
 
 router = APIRouter()
 
+
+
 @router.get('/getProject', summary = '获取项目信息')
 async def get_project_info(*,
                            db:Session = Depends(deps.get_db),
@@ -33,7 +35,8 @@ async def create_project(
     #     project_name= obj_in.project_name,
     #     project_user= obj_in.project_user
     # )
-    auto_project_eg =  curd_project.create(db ,obj_in = obj_in )
+    curd_project.create(db ,obj_in = obj_in )
+
     return response_code.resp_200(data = {
         "projectname": "test1",
         "projectuser": "test2"
