@@ -5,7 +5,7 @@ from aioredis import create_redis_pool
 
 from api.v1.v1_router import api_v1_router
 from core.config import settings
-
+from db.sys_redis import redis_client
 
 
 def create_app() -> FastAPI:
@@ -46,7 +46,9 @@ def register_redis(app: FastAPI) -> None:
         获取链接
         :return:
         """
-        app.state.redis = await create_redis_pool(settings.REDIS_URL)
+        # app.state.redis = await create_redis_pool(settings.REDIS_URL)
+        redis_client.init_redis_connect()
+
     # 关闭事件
     @app.on_event('shutdown')
     async def shutdown_event():

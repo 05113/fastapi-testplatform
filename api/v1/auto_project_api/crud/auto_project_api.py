@@ -6,6 +6,7 @@ from models.auto_project_api import AutoProjectApi , AutoProjectApiGroup
 from api.v1.auto_base_api.crud.auto_base_api import curd_base_api
 from api.v1.auto_base_api_case.curd.auto_base_api_case import curd_base_case
 from ..schemas import auto_project_api_schemas
+from common import deps
 
 class CURDAutoProjectApi(CRUDBase[AutoProjectApi,AutoProjectApi,AutoProjectApi]):
     def addApi(
@@ -53,4 +54,7 @@ class CURDAutoProjectApi(CRUDBase[AutoProjectApi,AutoProjectApi,AutoProjectApi])
             db.commit()
         except:
             db.rollback()
+    def get_project_id_by_case_id(self ,db : Session ,  case_id : int):
+        api_inter_job_case_obj = db.query(self.model).join(AutoProjectApiGroup , self.model.id == AutoProjectApiGroup.project_api_id).filter(AutoProjectApiGroup.id == case_id).first()
+        return api_inter_job_case_obj
 curd_project_api = CURDAutoProjectApi(AutoProjectApi)

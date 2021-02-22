@@ -7,6 +7,12 @@ from typing import Any , List
 import traceback
 from fastapi import FastAPI
 class CRUDAutoBaseCase(CRUDBase[AutoBaseApiGroup,AutoBaseApiGroup,AutoBaseApiGroup]):
+    # [
+    #     {"assert_key": "response.success",
+    #      "comparison_operator": "equal",
+    #      "assert_value": true
+    #      }
+    # ]
     def create_base_case(
         self , * , db : Session , obj_in : auto_base_api_case_schemas.BaseCaseCreate , base_api_id : int
     ) -> Any:

@@ -22,21 +22,19 @@ def get_projectCaseInfo(
     return response_code.resp_200(data = response_data)
 
 @router.get('/runProjectCase')
-async def run_project_case(
+def run_project_case(
         *,
         db : Session = Depends(dependency = deps.get_db),
-        request : Request,
         project_case_id : int = Depends(dependency = deps.get_project_case),
         api_host : str,
         api_port : str
 ) -> Any:
-    a = await crud_project_case.run_project_case(
+    result , list  = crud_project_case.run_project_case(
             db = db ,
-            request = request,
             project_case_id = project_case_id ,
             api_host = api_host,
             api_port = api_port
         )
 
-    pass
+    return result
 

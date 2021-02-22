@@ -52,3 +52,6 @@ print(re.sub(r'{.*?}' , '1' , '{aaa}/{bbb}'))
 # pattern = '{(.*?)}'
 # result = re.match(pattern,'{aaa}/{bbb}')
 # print(result.group(1))
+print(re.search('\$(.+)}|\$(.+),','kkkkkkk$a}').group(1))
+
+print(re.search('\$(.+)','$key1').group(1))

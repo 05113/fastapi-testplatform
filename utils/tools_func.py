@@ -46,6 +46,13 @@ def re_sub_url(url : str , config : dict):
             url = re.sub(r'{.*?}' , value , url,1)
 
         return url
+def re_get_request_body_value(str):
+    pattern = '\$(.+)'
+
+    value = re.search(pattern,str)
+
+    return value.group(1)
+
 
 if __name__ == '__main__':
     aa = {}

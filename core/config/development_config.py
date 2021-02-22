@@ -14,7 +14,7 @@ class Settings(BaseSettings):
     MYSQL_PASSWORD: str = "root123"
     MYSQL_DATABASE: str = "platform_test"
 
-    REDIS_HOST: Union[AnyHttpUrl, IPvAnyAddress] = "127.0.0.1"
+    REDIS_HOST: str = "127.0.0.1"
     REDIS_PASSWORD : str = ''
     REDIS_PORT : int = 6379
     REDIS_DB : int = 0

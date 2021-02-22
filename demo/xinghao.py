@@ -16,3 +16,7 @@ if __name__ == '__main__':
     for item in range(0):
         print("a")
 
+    a = False
+    b = False
+    print( a and b)
+
