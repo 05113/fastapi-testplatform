@@ -28,9 +28,9 @@ def update_test_plan(
 @router.get('/run_test_plan')
 def run_test_plan(
         *,
-        db : Session = Depends(dependency = deps.get_db),
+        # db : Session = Depends(dependency = deps.get_db),
         test_plan_id : int = Depends(dependency = deps.get_test_plan)
 ):
-    crud_test_plan.run_test_plan(db = db , test_plan_id = test_plan_id)
+    crud_test_plan.run_test_plan( test_plan_id = test_plan_id)
 
     return 1

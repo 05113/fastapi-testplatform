@@ -55,3 +55,9 @@ print(re.sub(r'{.*?}' , '1' , '{aaa}/{bbb}'))
 print(re.search('\$(.+)}|\$(.+),','kkkkkkk$a}').group(1))
 
 print(re.search('\$(.+)','$key1').group(1))
+
+k = '<div class="nam">中国</div>'
+print(re.findall('.*?>(.*?)<',k))
+a = "not 404 found 张三 99 深圳"
+
+

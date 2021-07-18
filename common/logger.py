@@ -1,5 +1,6 @@
 from loguru import logger
 import os
+import sys
 import time
 
 # 获取目录:
@@ -25,5 +26,9 @@ logger.add(__log_debug_path,rotation="00:00",retention="10 days",compression='.z
 # 参数化
 # logger.info('If you are using Python {}, prefer {feature} of course!', 3.6, feature='f-strings')
 
-__all__ = ['logger']
+
+def error(filename,fileline):
+    errorlog = '异常文件名:{}-异常代码行数:{}'.format(filename,fileline)
+    return errorlog
+__all__ = ['logger',error]
 

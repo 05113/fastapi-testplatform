@@ -3,6 +3,12 @@ import decimal
 import json
 from typing import Union
 import re
+import sys
+import os
+
+from common.logger import logger , error
+from common.exc import MyException
+
 def _alchemy_encoder(obj):
     """
     处理序列化中的时间和小数
@@ -35,17 +41,25 @@ def serialize_sqlalchemy_obj(obj) -> Union[dict, list]:
         return json.loads(json.dumps(dict(obj), default=_alchemy_encoder))
 
 def re_sub_url(url : str , config : dict):
-    pattern = r'{(.*?)}'
-    re_list = re.findall(pattern = pattern , string = url)
-    if len(re_list) == 0:
-        return url
-    else:
-        for item in range(len(re_list)):
-            value = config[re_list[item]]
-            # 第一个参数对应的正则表达式，第二个参数为要替换成的字符串，第三个参数为源字符串，第四个参数为可选项，代表最多替换的次数，如果忽略不写，则会将符合模式的结果全部替换。
-            url = re.sub(r'{.*?}' , value , url,1)
+    try:
+        pattern = r'{(.*?)}'
+        re_list = re.findall(pattern = pattern , string = url)
+        if len(re_list) == 0:
+            return url
+        else:
+            for item in range(len(re_list)):
+                value = config[re_list[item]]
+                # 第一个参数对应的正则表达式，第二个参数为要替换成的字符串，第三个参数为源字符串，第四个参数为可选项，代表最多替换的次数，如果忽略不写，则会将符合模式的结果全部替换。
+                url = re.sub(r'{.*?}' , value , url,1)
+                return url
+    except KeyError as e:
+        logger.error(error(filename=os.path.basename(__file__), fileline=sys._getframe().f_lineno))
+        raise MyException('RedisNoConfigError')
+    except:
+        logger.error('异常文件名:{}-异常代码行数:{}'.format(os.path.basename(__file__),sys._getframe().f_lineno))
+        raise
 
-        return url
+
 def re_get_request_body_value(str):
     pattern = '\$(.+)'
 

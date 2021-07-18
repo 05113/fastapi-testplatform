@@ -14,6 +14,7 @@ def get_db() -> Generator:
         db = DbSession()
         yield db
     finally:
+        print('222222222222222')
         db.close()
 
 def get_base_api(

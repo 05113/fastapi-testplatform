@@ -29,12 +29,18 @@ def run_project_case(
         api_host : str,
         api_port : str
 ) -> Any:
-    result , list  = crud_project_case.run_project_case(
-            db = db ,
-            project_case_id = project_case_id ,
-            api_host = api_host,
-            api_port = api_port
-        )
+    try:
+        result , list  = crud_project_case.run_project_case(
+                db = db ,
+                project_case_id = project_case_id ,
+                api_host = api_host,
+                api_port = api_port
+            )
+        return response_code.resp_200(data={
+            "result": result,
+            "result_detail": list
+        })
+    except:
+        return response_code.resp_500()
 
-    return result
 
